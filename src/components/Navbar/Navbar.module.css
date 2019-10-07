@@ -1,0 +1,13 @@
+.navbar {
+  grid-area: side;
+  background: gold;
+}
+
+.navbar a {
+  color: #333;
+  text-decoration: none;
+}
+
+.navbar a.active {
+  color: orangered;
+}

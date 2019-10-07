@@ -1,0 +1,11 @@
+.header {
+  grid-area: header;
+  background: #006a00;
+}
+
+.header__logo {
+}
+
+.header__logo img {
+  display: block;
+}

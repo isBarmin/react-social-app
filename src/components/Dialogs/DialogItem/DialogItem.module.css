@@ -1,0 +1,10 @@
+.dialogItem {
+}
+
+.dialogItem a {
+  text-decoration: none;
+}
+
+.dialogItem a.active {
+  color: orangered;
+}

@@ -1,0 +1,14 @@
+.app {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-areas:
+    "header header"
+    "side main";
+
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.app__main {
+  grid-area: main;
+}
