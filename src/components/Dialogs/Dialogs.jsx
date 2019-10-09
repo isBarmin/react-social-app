@@ -5,7 +5,7 @@ import DialogItem from './DialogItem/DialogItem';
 import DialogMessage from './DialogMessage/DialogMessage';
 
 const Dialogs = props => {
-  const { dialogs, messages } = props;
+  const { dialogs, messages } = props.dialogsPage;
 
   const renderDialogItems = () => {
     return dialogs.map(item => {
@@ -15,7 +15,9 @@ const Dialogs = props => {
 
   const renderDialogMessages = () => {
     return messages.map(item => {
-      return <DialogMessage message={item.message} id={item.id} />;
+      return (
+        <DialogMessage key={item.id} message={item.message} id={item.id} />
+      );
     });
   };
 
