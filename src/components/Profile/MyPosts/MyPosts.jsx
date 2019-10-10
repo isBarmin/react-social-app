@@ -4,7 +4,7 @@ import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
 const MyPosts = props => {
-  const { posts } = props;
+  const { posts, newPostText, changeNewPostText, addPost } = props;
 
   const renderPosts = () => {
     return posts.map(post => {
@@ -12,13 +12,27 @@ const MyPosts = props => {
     });
   };
 
+  const handleSubmit = event => {
+    event.preventDefault();
+    addPost();
+  };
+
+  const handleChangeTextarea = event => {
+    const text = event.target.value;
+    changeNewPostText(text);
+  };
+
   return (
     <div>
       <h3>My posts</h3>
 
-      <form className="form-post">
+      <form className="form-post" onSubmit={handleSubmit}>
         <p>
-          <textarea name="post" />
+          <textarea
+            name="post"
+            onChange={handleChangeTextarea}
+            value={newPostText}
+          />
         </p>
         <button>Add post</button>
       </form>
