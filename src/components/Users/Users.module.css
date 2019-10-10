@@ -1,0 +1,35 @@
+.userCard {
+  margin-bottom: 32px;
+}
+
+.userCard__side {
+  margin-bottom: 8px;
+}
+
+.userCard__avatar {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  background: #eee;
+  overflow: hidden;
+}
+
+.userCard__avatar img {
+  display: block;
+}
+
+.userCard__body {
+}
+
+.userCard__body > :first-child {
+  margin-top: 0;
+}
+
+.userCard__body > :last-child {
+  margin-bottom: 0;
+}
+
+.userCard__text {
+  margin: 4px 0;
+}
