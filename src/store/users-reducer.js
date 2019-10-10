@@ -4,23 +4,26 @@ const initialState = {
   users: [
     {
       id: 1,
+      photoUrl: 'https://avatars.dicebear.com/v2/male/Dmitry.svg',
       fullName: 'Dmitry',
       status: 'I am a boss',
-      location: { city: 'Minsk', Country: 'Belarus' },
+      location: { city: 'Minsk', country: 'Belarus' },
       followed: false
     },
     {
       id: 2,
+      photoUrl: 'https://avatars.dicebear.com/v2/male/Sanya.svg',
       fullName: 'Sasha',
       status: 'I am a boss',
-      location: { city: 'Moscow', Country: 'Moscow' },
+      location: { city: 'Moscow', country: 'Moscow' },
       followed: true
     },
     {
       id: 3,
+      photoUrl: 'https://avatars.dicebear.com/v2/male/Petya.svg',
       fullName: 'Petya',
       status: 'I am a boss',
-      location: { city: 'Kiev', Country: 'Ukraine' },
+      location: { city: 'Kiev', country: 'Ukraine' },
       followed: false
     }
   ]

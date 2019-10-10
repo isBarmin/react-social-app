@@ -21,7 +21,7 @@ const Users = props => {
         <div className={s.userCard__body}>
           <p className={s.userCard__text}>{user.fullName}</p>
           <p className={s.userCard__text}>
-            {user.location.Country} {user.location.city}
+            {user.location.country} {user.location.city}
           </p>
           <p className={s.userCard__text}>{user.status}</p>
         </div>
