@@ -1,3 +1,5 @@
+import { CHANGE_NEW_MESSAGE_TEXT, ADD_MESSAGE } from './actionTypes';
+
 const initialState = {
   dialogs: [
     { id: 1, name: 'Dmitry' },
@@ -13,11 +15,44 @@ const initialState = {
     { id: 3, message: 'How are you?' },
     { id: 4, message: 'I am fine' },
     { id: 5, message: 'gooood)' }
-  ]
+  ],
+
+  newMessageText: ''
 };
 
+//  reducer
 const dialogsReducer = (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case CHANGE_NEW_MESSAGE_TEXT:
+      return {
+        ...state,
+        newMessageText: action.text
+      };
+
+    case ADD_MESSAGE:
+      const newMessage = {
+        id: 10,
+        message: state.newMessageText
+      };
+      return {
+        ...state,
+        messages: [...state.messages, newMessage],
+        newMessageText: ''
+      };
+
+    default:
+      return state;
+  }
 };
+
+// action creators
+export const changeNewMessageTextAC = text => ({
+  type: CHANGE_NEW_MESSAGE_TEXT,
+  text
+});
+
+export const addMessageAC = () => ({
+  type: ADD_MESSAGE
+});
 
 export default dialogsReducer;

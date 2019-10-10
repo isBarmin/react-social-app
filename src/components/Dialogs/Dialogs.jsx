@@ -6,6 +6,7 @@ import DialogMessage from './DialogMessage/DialogMessage';
 
 const Dialogs = props => {
   const { dialogs, messages } = props.dialogsPage;
+  const { newMessageText, changeNewMessageText, addMessage } = props;
 
   const renderDialogItems = () => {
     return dialogs.map(item => {
@@ -21,13 +22,36 @@ const Dialogs = props => {
     });
   };
 
+  const handleChangeText = event => {
+    const text = event.target.value;
+    changeNewMessageText(text);
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    addMessage();
+  };
+
   return (
     <div className={s.dialogs}>
       <div className={s.dialogs__aside}>
         <ul className={s.dialogsList}>{renderDialogItems()}</ul>
       </div>
 
-      <div className={s.dialogs__main}>{renderDialogMessages()}</div>
+      <div className={s.dialogs__main}>
+        {renderDialogMessages()}
+
+        <form className="form-message" onSubmit={handleSubmit}>
+          <p>
+            <textarea
+              name="message"
+              value={newMessageText}
+              onChange={handleChangeText}
+            />
+          </p>
+          <button>Send</button>
+        </form>
+      </div>
     </div>
   );
 };
