@@ -6,7 +6,7 @@ import Header from '../Header/Header';
 import Navbar from '../Navbar/Navbar';
 import Profile from '../Profile/Profile';
 import DialogsContainer from '../Dialogs/DialogsContainer';
-import Users from '../Users/Users';
+import UsersContainer from '../Users/UsersContainer';
 
 const App = props => {
   return (
@@ -17,7 +17,7 @@ const App = props => {
       <main className="app__main">
         <Route path="/profile" render={() => <Profile />} />
         <Route path="/dialogs" render={() => <DialogsContainer />} />
-        <Route path="/users" render={() => <Users />} />
+        <Route path="/users" render={() => <UsersContainer />} />
       </main>
     </div>
   );
