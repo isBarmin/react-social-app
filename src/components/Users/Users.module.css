@@ -17,6 +17,7 @@
 
 .userCard__avatar img {
   display: block;
+  width: 100%;
 }
 
 .userCard__body {
@@ -32,4 +33,14 @@
 
 .userCard__text {
   margin: 4px 0;
+}
+
+.pager {
+}
+
+.pager__item {
+}
+
+.pager__item.active {
+  font-weight: bold;
 }
