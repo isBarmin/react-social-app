@@ -3,14 +3,16 @@ import {
   FOLLOW,
   UNFOLLOW,
   SET_TOTAL_USERS_COUNT,
-  SET_CURRENT_PAGE
+  SET_CURRENT_PAGE,
+  SET_IS_FETCHING
 } from "./actionTypes";
 
 const initialState = {
   users: [],
   pageSize: 20,
   totalUsersCount: 0,
-  currentPage: 1
+  currentPage: 1,
+  isFetching: false
 };
 
 // reducer
@@ -56,6 +58,12 @@ const usersReducer = (state = initialState, action) => {
         currentPage: action.currentPage
       };
 
+    case SET_IS_FETCHING:
+      return {
+        ...state,
+        isFetching: action.isFetching
+      };
+
     default:
       return state;
   }
@@ -85,6 +93,11 @@ export const setTotalUsersCountAC = totalUsersCount => ({
 export const setCurrentPageAC = currentPage => ({
   type: SET_CURRENT_PAGE,
   currentPage
+});
+
+export const setIsFetchingAC = isFetching => ({
+  type: SET_IS_FETCHING,
+  isFetching
 });
 
 export default usersReducer;

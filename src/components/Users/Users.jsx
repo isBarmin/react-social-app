@@ -2,9 +2,11 @@ import React from "react";
 import axios from "axios";
 
 import s from "./Users.module.css";
+import Preloader from "../Preloader/Preloader";
 
 class Users extends React.Component {
   componentDidMount() {
+    this.props.setIsFetching(true);
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?page=${
@@ -16,6 +18,7 @@ class Users extends React.Component {
         const totalCount = response.data.totalCount;
         this.props.setUsers(users);
         this.props.setTotalUsersCount(totalCount);
+        this.props.setIsFetching(false);
       });
   }
 
@@ -71,6 +74,7 @@ class Users extends React.Component {
   };
 
   handlePagerItemClick = currentPage => {
+    this.props.setIsFetching(true);
     this.props.setCurrentPage(currentPage);
     axios
       .get(
@@ -81,6 +85,7 @@ class Users extends React.Component {
       .then(response => {
         const users = response.data.items;
         this.props.setUsers(users);
+        this.props.setIsFetching(false);
       });
   };
 
@@ -89,6 +94,9 @@ class Users extends React.Component {
       <div>
         <h1>Users</h1>
         {this.renderPagination()}
+
+        {this.props.isFetching ? <Preloader /> : null}
+
         {this.renderUsers()}
       </div>
     );

@@ -7,14 +7,16 @@ import {
   followAC,
   unfollowAC,
   setTotalUsersCountAC,
-  setCurrentPageAC
+  setCurrentPageAC,
+  setIsFetchingAC
 } from "../../store/users-reducer";
 
 const mapStateToProps = state => ({
   users: state.usersPage.users,
   totalUsersCount: state.usersPage.totalUsersCount,
   pageSize: state.usersPage.pageSize,
-  currentPage: state.usersPage.currentPage
+  currentPage: state.usersPage.currentPage,
+  isFetching: state.usersPage.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -22,7 +24,8 @@ const mapDispatchToProps = dispatch => ({
   follow: userId => dispatch(followAC(userId)),
   unfollow: userId => dispatch(unfollowAC(userId)),
   setTotalUsersCount: count => dispatch(setTotalUsersCountAC(count)),
-  setCurrentPage: num => dispatch(setCurrentPageAC(num))
+  setCurrentPage: num => dispatch(setCurrentPageAC(num)),
+  setIsFetching: isFetching => dispatch(setIsFetchingAC(isFetching))
 });
 
 export default connect(
