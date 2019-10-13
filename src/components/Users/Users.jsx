@@ -1,31 +1,22 @@
 import React from "react";
-import axios from "axios";
 
 import s from "./Users.module.css";
 import Preloader from "../Preloader/Preloader";
 
-class Users extends React.Component {
-  componentDidMount() {
-    this.props.setIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${
-          this.props.currentPage
-        }&count=${this.props.pageSize}`
-      )
-      .then(response => {
-        const users = response.data.items;
-        const totalCount = response.data.totalCount;
-        this.props.setUsers(users);
-        this.props.setTotalUsersCount(totalCount);
-        this.props.setIsFetching(false);
-      });
-  }
+const Users = props => {
+  const {
+    users,
+    follow,
+    unfollow,
+    totalUsersCount,
+    pageSize,
+    currentPage,
+    changePage,
+    isFetching
+  } = props;
 
-  renderUsers = () => {
-    return this.props.users.map(user => {
-      const { follow, unfollow } = this.props;
-
+  const renderUsers = () => {
+    return users.map(user => {
       return (
         <div className={s.userCard} key={user.id}>
           <div className={s.userCard__side}>
@@ -48,8 +39,7 @@ class Users extends React.Component {
     });
   };
 
-  renderPagination = () => {
-    const { totalUsersCount, pageSize, currentPage } = this.props;
+  const renderPagination = () => {
     const pagesCount = Math.ceil(totalUsersCount / pageSize);
     const items = [];
 
@@ -62,7 +52,7 @@ class Users extends React.Component {
         <button
           key={i}
           className={classes.join(" ")}
-          onClick={() => this.handlePagerItemClick(i)}
+          onClick={() => changePage(i)}
         >
           {i}
         </button>
@@ -73,34 +63,14 @@ class Users extends React.Component {
     return <div className={s.pager}>{items}</div>;
   };
 
-  handlePagerItemClick = currentPage => {
-    this.props.setIsFetching(true);
-    this.props.setCurrentPage(currentPage);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${
-          this.props.pageSize
-        }`
-      )
-      .then(response => {
-        const users = response.data.items;
-        this.props.setUsers(users);
-        this.props.setIsFetching(false);
-      });
-  };
-
-  render() {
-    return (
-      <div>
-        <h1>Users</h1>
-        {this.renderPagination()}
-
-        {this.props.isFetching ? <Preloader /> : null}
-
-        {this.renderUsers()}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h1>Users</h1>
+      {renderPagination()}
+      {isFetching ? <Preloader /> : null}
+      {renderUsers()}
+    </div>
+  );
+};
 
 export default Users;
