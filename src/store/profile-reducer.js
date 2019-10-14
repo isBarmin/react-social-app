@@ -1,14 +1,19 @@
-import { CHANGE_NEW_POST_TEXT, ADD_POST } from './actionTypes';
+import {
+  CHANGE_NEW_POST_TEXT,
+  ADD_POST,
+  SET_USER_PROFILE
+} from "./actionTypes";
 
 const initialState = {
   posts: [
-    { id: 1, message: 'Hi' },
-    { id: 2, message: 'Yo' },
-    { id: 3, message: 'How are you?' },
-    { id: 4, message: 'I am fine' },
-    { id: 5, message: 'gooood)' }
+    { id: 1, message: "Hi" },
+    { id: 2, message: "Yo" },
+    { id: 3, message: "How are you?" },
+    { id: 4, message: "I am fine" },
+    { id: 5, message: "gooood)" }
   ],
-  newPostText: ''
+  newPostText: "",
+  userProfile: null
 };
 
 // reducer
@@ -28,7 +33,13 @@ const profileReducer = (state = initialState, action) => {
       return {
         ...state,
         posts: [...state.posts, newPost],
-        newPostText: ''
+        newPostText: ""
+      };
+
+    case SET_USER_PROFILE:
+      return {
+        ...state,
+        userProfile: action.profile
       };
 
     default:
@@ -44,6 +55,11 @@ export const changeNewPostTextAC = text => ({
 
 export const addPostAC = () => ({
   type: ADD_POST
+});
+
+export const setUserProfileAC = profile => ({
+  type: SET_USER_PROFILE,
+  profile
 });
 
 export default profileReducer;
