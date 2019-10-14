@@ -7,11 +7,11 @@ import { setUserProfileAC } from "../../store/profile-reducer";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    this.props.setIsFetching(true);
     axios
       .get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
       .then(response => {
-        const profile = response.data.profile;
+        const profile = response.data;
+        this.props.setUserProfile(profile);
       });
   }
 
@@ -21,7 +21,7 @@ class ProfileContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  profile: state.profile.profile
+  profile: state.profile.userProfile
 });
 
 const mapDispatchToProps = dispatch => ({

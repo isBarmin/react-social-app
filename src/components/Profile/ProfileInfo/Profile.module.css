@@ -1,0 +1,19 @@
+.userProfile {
+  display: flex;
+}
+
+.userProfile__side {
+}
+
+.userProfile__photo {
+}
+
+.userProfile__photo img {
+  display: block;
+}
+
+.userProfile__body {
+}
+
+.userProfile__about {
+}
