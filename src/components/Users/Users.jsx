@@ -2,6 +2,7 @@ import React from "react";
 
 import s from "./Users.module.css";
 import Preloader from "../Preloader/Preloader";
+import { NavLink } from "react-router-dom";
 
 const Users = props => {
   const {
@@ -21,7 +22,9 @@ const Users = props => {
         <div className={s.userCard} key={user.id}>
           <div className={s.userCard__side}>
             <div className={s.userCard__avatar}>
-              <img src={user.photos.small} alt="" />
+              <NavLink to={`profile/${user.id}`}>
+                <img src={user.photos.small} alt="" />
+              </NavLink>
             </div>
             {user.followed ? (
               <button onClick={() => unfollow(user.id)}>unfollow</button>
