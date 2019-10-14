@@ -1,11 +1,22 @@
 .header {
   grid-area: header;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 8px 16px;
   background: #006a00;
 }
 
-.header__logo {
+.header__part {
 }
 
-.header__logo img {
+.header__part_right {
+  margin-left: auto;
+}
+
+.logo {
+}
+
+.logo img {
   display: block;
 }
