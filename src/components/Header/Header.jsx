@@ -1,7 +1,7 @@
 import React from "react";
 
 import s from "./Header.module.css";
-import AuthUser from "./AuthUser/AuthUser";
+import AuthUserContainer from "./AuthUser/AuthUserContainer";
 
 const Header = props => {
   return (
@@ -13,7 +13,7 @@ const Header = props => {
       </div>
 
       <div className={`${s.header__part}  ${s.header__part_right}`}>
-        <AuthUser />
+        <AuthUserContainer />
       </div>
     </header>
   );

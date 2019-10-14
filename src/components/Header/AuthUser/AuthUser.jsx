@@ -7,14 +7,14 @@ const AuthUser = props => {
   let body;
 
   if (isAuth) {
-    body = <button>Logout</button>;
-  } else {
     body = (
       <>
         <span className={s.userBlock__login}>{login}</span>
-        <NavLink to="/login">Login</NavLink>
+        <button>Logout</button>
       </>
     );
+  } else {
+    body = <NavLink to="/login">Login</NavLink>;
   }
 
   return <div className={s.userBlock}>{body}</div>;
