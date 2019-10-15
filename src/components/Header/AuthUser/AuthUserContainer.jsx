@@ -1,23 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
-import axios from "axios";
 
 import AuthUser from "./AuthUser";
-import { setAuthUserDataAC } from "../../../store/auth-reducer";
+import { getAuthUserDataTC } from "../../../store/auth-reducer";
+import { authAPI } from "../../../api/api";
 
 class AuthUserContainer extends React.Component {
   componentDidMount() {
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-        withCredentials: true
-      })
-      .then(response => {
-        const { id, email, login } = response.data.data;
-
-        if (response.data.resultCode === 0) {
-          this.props.setAuthUserData(id, email, login);
-        }
-      });
+    this.props.getAuthUserData();
+    authAPI.me().then(data => {
+      const { id, email, login } = data.data;
+      if (data.resultCode === 0) {
+        this.props.setAuthUserData(id, email, login);
+      }
+    });
   }
 
   render() {
@@ -32,12 +28,9 @@ const mapStateToProps = state => ({
   isAuth: state.auth.isAuth
 });
 
-const mapDispatchToProps = dispatch => ({
-  setAuthUserData: (id, email, login) =>
-    dispatch(setAuthUserDataAC(id, email, login))
-});
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  {
+    getAuthUserData: getAuthUserDataTC
+  }
 )(AuthUserContainer);
