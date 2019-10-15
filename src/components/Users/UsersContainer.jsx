@@ -3,38 +3,23 @@ import { connect } from "react-redux";
 
 import Users from "./Users";
 import {
-  setUsersAC,
   followAC,
   unfollowAC,
-  setTotalUsersCountAC,
   setCurrentPageAC,
-  setIsFetchingAC,
-  setFollowingProgressAC
+  setFollowingProgressAC,
+  getUsersTC
 } from "../../store/users-reducer";
-import { usersAPI } from "../../api/api";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.setIsFetching(true);
-    usersAPI
-      .getUsers(this.props.currentPage, this.props.pageSize)
-      .then(data => {
-        const users = data.items;
-        const totalCount = data.totalCount;
-        this.props.setUsers(users);
-        this.props.setTotalUsersCount(totalCount);
-        this.props.setIsFetching(false);
-      });
+    const { getUsers, currentPage, pageSize } = this.props;
+    getUsers(currentPage, pageSize);
   }
 
   changePage = pageNum => {
-    this.props.setIsFetching(true);
+    const { getUsers, pageSize } = this.props;
     this.props.setCurrentPage(pageNum);
-    usersAPI.getUsers(pageNum, this.props.pageSize).then(data => {
-      const users = data.items;
-      this.props.setUsers(users);
-      this.props.setIsFetching(false);
-    });
+    getUsers(pageNum, pageSize);
   };
 
   render() {
@@ -64,16 +49,13 @@ const mapStateToProps = state => ({
   followedInProgress: state.usersPage.followedInProgress
 });
 
-const mapDispatchToProps = dispatch => ({
-  setUsers: users => dispatch(setUsersAC(users)),
-  follow: userId => dispatch(followAC(userId)),
-  unfollow: userId => dispatch(unfollowAC(userId)),
-  setTotalUsersCount: count => dispatch(setTotalUsersCountAC(count)),
-  setCurrentPage: num => dispatch(setCurrentPageAC(num)),
-  setIsFetching: isFetching => dispatch(setIsFetchingAC(isFetching)),
-  setFollowingProgress: (isFetching, userId) =>
-    dispatch(setFollowingProgressAC(isFetching, userId))
-});
+const mapDispatchToProps = {
+  follow: followAC,
+  unfollow: unfollowAC,
+  setCurrentPage: setCurrentPageAC,
+  setFollowingProgress: setFollowingProgressAC,
+  getUsers: getUsersTC
+};
 
 export default connect(
   mapStateToProps,

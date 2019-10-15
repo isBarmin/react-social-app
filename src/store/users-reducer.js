@@ -1,3 +1,4 @@
+import { usersAPI } from "../api/api";
 import {
   SET_USERS,
   FOLLOW,
@@ -115,5 +116,16 @@ export const setFollowingProgressAC = (isFetching, userId) => ({
   isFetching,
   userId
 });
+
+// thunk
+export const getUsersTC = (page, pageSize) => dispatch => {
+  dispatch(setIsFetchingAC(true));
+  usersAPI.getUsers(page, pageSize).then(data => {
+    const users = data.items;
+    dispatch(setUsersAC(users));
+    dispatch(setTotalUsersCountAC(data.totalCount));
+    dispatch(setIsFetchingAC(false));
+  });
+};
 
 export default usersReducer;
