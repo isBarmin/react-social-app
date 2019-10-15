@@ -3,6 +3,7 @@ import React from "react";
 import s from "./Users.module.css";
 import Preloader from "../Preloader/Preloader";
 import { NavLink } from "react-router-dom";
+import { usersAPI } from "../../api/api";
 
 const Users = props => {
   const {
@@ -27,9 +28,29 @@ const Users = props => {
               </NavLink>
             </div>
             {user.followed ? (
-              <button onClick={() => unfollow(user.id)}>unfollow</button>
+              <button
+                onClick={() => {
+                  usersAPI.unfollow(user.id).then(response => {
+                    if (response.resultCode === 0) {
+                      unfollow(user.id);
+                    }
+                  });
+                }}
+              >
+                unfollow
+              </button>
             ) : (
-              <button onClick={() => follow(user.id)}>follow</button>
+              <button
+                onClick={() => {
+                  usersAPI.follow(user.id).then(response => {
+                    if (response.resultCode === 0) {
+                      follow(user.id);
+                    }
+                  });
+                }}
+              >
+                follow
+              </button>
             )}
           </div>
 
