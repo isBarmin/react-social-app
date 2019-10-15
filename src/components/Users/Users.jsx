@@ -14,7 +14,9 @@ const Users = props => {
     pageSize,
     currentPage,
     changePage,
-    isFetching
+    isFetching,
+    followedInProgress,
+    setFollowingProgress
   } = props;
 
   const renderUsers = () => {
@@ -29,11 +31,14 @@ const Users = props => {
             </div>
             {user.followed ? (
               <button
+                disabled={followedInProgress.includes(user.id)}
                 onClick={() => {
+                  setFollowingProgress(true, user.id);
                   usersAPI.unfollow(user.id).then(response => {
                     if (response.resultCode === 0) {
                       unfollow(user.id);
                     }
+                    setFollowingProgress(false, user.id);
                   });
                 }}
               >
@@ -41,11 +46,14 @@ const Users = props => {
               </button>
             ) : (
               <button
+                disabled={followedInProgress.includes(user.id)}
                 onClick={() => {
+                  setFollowingProgress(true, user.id);
                   usersAPI.follow(user.id).then(response => {
                     if (response.resultCode === 0) {
                       follow(user.id);
                     }
+                    setFollowingProgress(false, user.id);
                   });
                 }}
               >

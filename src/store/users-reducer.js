@@ -4,7 +4,8 @@ import {
   UNFOLLOW,
   SET_TOTAL_USERS_COUNT,
   SET_CURRENT_PAGE,
-  SET_IS_FETCHING
+  SET_IS_FETCHING,
+  SET_FOLLOWING_PROGRESS
 } from "./actionTypes";
 
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
   pageSize: 20,
   totalUsersCount: 0,
   currentPage: 1,
-  isFetching: false
+  isFetching: false,
+  followedInProgress: []
 };
 
 // reducer
@@ -64,6 +66,14 @@ const usersReducer = (state = initialState, action) => {
         isFetching: action.isFetching
       };
 
+    case SET_FOLLOWING_PROGRESS:
+      return {
+        ...state,
+        followedInProgress: action.isFetching
+          ? [...state.followedInProgress, action.userId]
+          : state.followedInProgress.filter(id => id !== action.userId)
+      };
+
     default:
       return state;
   }
@@ -98,6 +108,12 @@ export const setCurrentPageAC = currentPage => ({
 export const setIsFetchingAC = isFetching => ({
   type: SET_IS_FETCHING,
   isFetching
+});
+
+export const setFollowingProgressAC = (isFetching, userId) => ({
+  type: SET_FOLLOWING_PROGRESS,
+  isFetching,
+  userId
 });
 
 export default usersReducer;

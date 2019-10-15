@@ -8,7 +8,8 @@ import {
   unfollowAC,
   setTotalUsersCountAC,
   setCurrentPageAC,
-  setIsFetchingAC
+  setIsFetchingAC,
+  setFollowingProgressAC
 } from "../../store/users-reducer";
 import { usersAPI } from "../../api/api";
 
@@ -47,6 +48,8 @@ class UsersContainer extends React.Component {
         follow={this.props.follow}
         unfollow={this.props.unfollow}
         changePage={this.changePage}
+        followedInProgress={this.props.followedInProgress}
+        setFollowingProgress={this.props.setFollowingProgress}
       />
     );
   }
@@ -57,7 +60,8 @@ const mapStateToProps = state => ({
   totalUsersCount: state.usersPage.totalUsersCount,
   pageSize: state.usersPage.pageSize,
   currentPage: state.usersPage.currentPage,
-  isFetching: state.usersPage.isFetching
+  isFetching: state.usersPage.isFetching,
+  followedInProgress: state.usersPage.followedInProgress
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -66,7 +70,9 @@ const mapDispatchToProps = dispatch => ({
   unfollow: userId => dispatch(unfollowAC(userId)),
   setTotalUsersCount: count => dispatch(setTotalUsersCountAC(count)),
   setCurrentPage: num => dispatch(setCurrentPageAC(num)),
-  setIsFetching: isFetching => dispatch(setIsFetchingAC(isFetching))
+  setIsFetching: isFetching => dispatch(setIsFetchingAC(isFetching)),
+  setFollowingProgress: (isFetching, userId) =>
+    dispatch(setFollowingProgressAC(isFetching, userId))
 });
 
 export default connect(
