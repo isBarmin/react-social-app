@@ -128,4 +128,24 @@ export const getUsersTC = (page, pageSize) => dispatch => {
   });
 };
 
+export const followTC = userId => dispatch => {
+  dispatch(setFollowingProgressAC(true, userId));
+  usersAPI.follow(userId).then(response => {
+    if (response.resultCode === 0) {
+      dispatch(followAC(userId));
+    }
+    dispatch(setFollowingProgressAC(false, userId));
+  });
+};
+
+export const unfollowTC = userId => dispatch => {
+  dispatch(setFollowingProgressAC(true, userId));
+  usersAPI.unfollow(userId).then(response => {
+    if (response.resultCode === 0) {
+      dispatch(unfollowAC(userId));
+    }
+    dispatch(setFollowingProgressAC(false, userId));
+  });
+};
+
 export default usersReducer;

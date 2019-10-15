@@ -1,9 +1,8 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 import s from "./Users.module.css";
 import Preloader from "../Preloader/Preloader";
-import { NavLink } from "react-router-dom";
-import { usersAPI } from "../../api/api";
 
 const Users = props => {
   const {
@@ -15,8 +14,7 @@ const Users = props => {
     currentPage,
     changePage,
     isFetching,
-    followedInProgress,
-    setFollowingProgress
+    followedInProgress
   } = props;
 
   const renderUsers = () => {
@@ -32,30 +30,14 @@ const Users = props => {
             {user.followed ? (
               <button
                 disabled={followedInProgress.includes(user.id)}
-                onClick={() => {
-                  setFollowingProgress(true, user.id);
-                  usersAPI.unfollow(user.id).then(response => {
-                    if (response.resultCode === 0) {
-                      unfollow(user.id);
-                    }
-                    setFollowingProgress(false, user.id);
-                  });
-                }}
+                onClick={() => unfollow(user.id)}
               >
                 unfollow
               </button>
             ) : (
               <button
                 disabled={followedInProgress.includes(user.id)}
-                onClick={() => {
-                  setFollowingProgress(true, user.id);
-                  usersAPI.follow(user.id).then(response => {
-                    if (response.resultCode === 0) {
-                      follow(user.id);
-                    }
-                    setFollowingProgress(false, user.id);
-                  });
-                }}
+                onClick={() => follow(user.id)}
               >
                 follow
               </button>
