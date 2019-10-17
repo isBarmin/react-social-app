@@ -3,6 +3,7 @@ import {
   ADD_POST,
   SET_USER_PROFILE
 } from "./actionTypes";
+import { usersAPI } from "../api/api";
 
 const initialState = {
   posts: [
@@ -61,5 +62,12 @@ export const setUserProfileAC = profile => ({
   type: SET_USER_PROFILE,
   profile
 });
+
+// thunk
+export const getUserProfileTC = userId => dispatch => {
+  usersAPI.getUserProfile(userId).then(profile => {
+    dispatch(setUserProfileAC(profile));
+  });
+};
 
 export default profileReducer;
