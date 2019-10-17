@@ -3,17 +3,10 @@ import { connect } from "react-redux";
 
 import AuthUser from "./AuthUser";
 import { getAuthUserDataTC } from "../../../store/auth-reducer";
-import { authAPI } from "../../../api/api";
 
 class AuthUserContainer extends React.Component {
   componentDidMount() {
     this.props.getAuthUserData();
-    authAPI.me().then(data => {
-      const { id, email, login } = data.data;
-      if (data.resultCode === 0) {
-        this.props.setAuthUserData(id, email, login);
-      }
-    });
   }
 
   render() {
