@@ -5,6 +5,7 @@ import { withRouter } from "react-router";
 
 import Profile from "./Profile";
 import { getUserProfileTC } from "../../store/profile-reducer";
+import withAuthRedirect from "../../hocs/withAuthRedirect";
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ const mapDispatchToProps = {
 };
 
 export default compose(
+  withAuthRedirect,
   withRouter,
   connect(
     mapStateToProps,

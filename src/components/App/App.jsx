@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 
 import "./App.css";
+import Login from "../Login/Login";
 import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 import ProfileContainer from "../Profile/ProfileContainer";
@@ -15,6 +16,7 @@ const App = props => {
       <Navbar />
 
       <main className="app__main">
+        <Route path="/login" render={() => <Login />} />
         <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
         <Route path="/dialogs" render={() => <DialogsContainer />} />
         <Route path="/users" render={() => <UsersContainer />} />
