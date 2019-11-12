@@ -1,9 +1,10 @@
 import {
   CHANGE_NEW_POST_TEXT,
   ADD_POST,
-  SET_USER_PROFILE
+  SET_USER_PROFILE,
+  SET_USER_STATUS
 } from "./actionTypes";
-import { usersAPI } from "../api/api";
+import { usersAPI, profileAPI } from "../api/api";
 
 const initialState = {
   posts: [
@@ -14,7 +15,8 @@ const initialState = {
     { id: 5, message: "gooood)" }
   ],
   newPostText: "",
-  userProfile: null
+  userProfile: null,
+  userStatus: null
 };
 
 // reducer
@@ -43,6 +45,12 @@ const profileReducer = (state = initialState, action) => {
         userProfile: action.profile
       };
 
+    case SET_USER_STATUS:
+      return {
+        ...state,
+        userStatus: action.status
+      };
+
     default:
       return state;
   }
@@ -63,10 +71,29 @@ export const setUserProfileAC = profile => ({
   profile
 });
 
+export const setUserStatusAC = status => ({
+  type: SET_USER_STATUS,
+  status
+});
+
 // thunk
 export const getUserProfileTC = userId => dispatch => {
   usersAPI.getUserProfile(userId).then(profile => {
     dispatch(setUserProfileAC(profile));
+  });
+};
+
+export const getUserStatusTC = userId => dispatch => {
+  profileAPI.getStatus(userId).then(status => {
+    dispatch(setUserStatusAC(status));
+  });
+};
+
+export const updateUserStatusTC = status => dispatch => {
+  profileAPI.updateStatus(status).then(response => {
+    if (response.resultCode === 0) {
+      dispatch(setUserStatusAC(status));
+    }
   });
 };
 
