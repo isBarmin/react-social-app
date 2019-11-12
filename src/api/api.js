@@ -21,12 +21,29 @@ export const usersAPI = {
     return instance.delete(`/follow/${userId}`).then(response => response.data);
   },
   getUserProfile(userId) {
-    return instance.get(`profile/${userId}`).then(response => response.data);
+    console.log("Obsolete method. Please use profileAPI object");
+    return profileAPI.getUserProfile(userId);
   }
 };
 
 export const authAPI = {
   me() {
     return instance.get(`auth/me`).then(response => response.data);
+  }
+};
+
+export const profileAPI = {
+  getUserProfile(userId) {
+    return instance.get(`profile/${userId}`).then(response => response.data);
+  },
+  getStatus(usreId) {
+    return instance
+      .get(`profile/status/${usreId}`)
+      .then(response => response.data);
+  },
+  updateStatus(status) {
+    return instance
+      .put(`profile/status`, { status })
+      .then(response => response.data);
   }
 };
