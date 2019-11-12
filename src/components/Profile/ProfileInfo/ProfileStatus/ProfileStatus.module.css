@@ -1,0 +1,12 @@
+.profileStatus {
+}
+
+.profileStatus p {
+  margin: 0;
+  padding: 3px 0;
+}
+
+.profileStatus input {
+  outline: none;
+  font: inherit;
+}
