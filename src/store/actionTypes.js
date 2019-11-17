@@ -3,7 +3,6 @@ export const ADD_POST = "ADD_POST";
 export const SET_USER_PROFILE = "SET_USER_PROFILE";
 export const SET_USER_STATUS = "SET_USER_STATUS";
 
-export const CHANGE_NEW_MESSAGE_TEXT = "CHANGE_NEW_MESSAGE_TEXT";
 export const ADD_MESSAGE = "ADD_MESSAGE";
 
 export const SET_USERS = "SET_USERS";
