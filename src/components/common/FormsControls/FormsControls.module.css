@@ -1,6 +1,14 @@
 .form-control {
 }
 
+.form-control__field {
+  box-sizing: border-box;
+  min-height: 32px;
+  padding: 2px 8px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
 .error input,
 .error textarea {
   border-color: tomato;
