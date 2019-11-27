@@ -1,9 +1,4 @@
-import {
-  CHANGE_NEW_POST_TEXT,
-  ADD_POST,
-  SET_USER_PROFILE,
-  SET_USER_STATUS
-} from "./actionTypes";
+import { ADD_POST, SET_USER_PROFILE, SET_USER_STATUS } from "./actionTypes";
 import { usersAPI, profileAPI } from "../api/api";
 
 const initialState = {
@@ -14,7 +9,6 @@ const initialState = {
     { id: 4, message: "I am fine" },
     { id: 5, message: "gooood)" }
   ],
-  newPostText: "",
   userProfile: null,
   userStatus: null
 };
@@ -22,21 +16,14 @@ const initialState = {
 // reducer
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CHANGE_NEW_POST_TEXT:
-      return {
-        ...state,
-        newPostText: action.text
-      };
-
     case ADD_POST:
       const newPost = {
         id: 10,
-        message: state.newPostText
+        message: action.postText
       };
       return {
         ...state,
-        posts: [...state.posts, newPost],
-        newPostText: ""
+        posts: [...state.posts, newPost]
       };
 
     case SET_USER_PROFILE:
@@ -57,13 +44,9 @@ const profileReducer = (state = initialState, action) => {
 };
 
 // action creators
-export const changeNewPostTextAC = text => ({
-  type: CHANGE_NEW_POST_TEXT,
-  text
-});
-
-export const addPostAC = () => ({
-  type: ADD_POST
+export const addPostAC = postText => ({
+  type: ADD_POST,
+  postText
 });
 
 export const setUserProfileAC = profile => ({

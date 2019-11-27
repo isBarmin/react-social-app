@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import s from './MyPosts.module.css';
-import Post from './Post/Post';
+import s from "./MyPosts.module.css";
+import Post from "./Post/Post";
+import { reduxForm, Field } from "redux-form";
 
 const MyPosts = props => {
-  const { posts, newPostText, changeNewPostText, addPost } = props;
+  const { posts, addPost } = props;
 
   const renderPosts = () => {
     return posts.map(post => {
@@ -12,36 +13,34 @@ const MyPosts = props => {
     });
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    addPost();
-  };
-
-  const handleChangeTextarea = event => {
-    const text = event.target.value;
-    changeNewPostText(text);
+  const handleSubmit = values => {
+    addPost(values.post);
   };
 
   return (
     <div>
       <h3>My posts</h3>
-
-      <form className="form-post" onSubmit={handleSubmit}>
-        <p>
-          <textarea
-            name="post"
-            onChange={handleChangeTextarea}
-            value={newPostText}
-          />
-        </p>
-        <button>Add post</button>
-      </form>
-
+      <ProfileAddPostForm className="form-add-post" onSubmit={handleSubmit} />
       <hr />
-
       <div className="post-list">{renderPosts()}</div>
     </div>
   );
 };
+
+let ProfileAddPostForm = ({ className, handleSubmit, ...props }) => {
+  console.log(props);
+  return (
+    <form className={className} onSubmit={handleSubmit}>
+      <p>
+        <Field component="textarea" name="post" placeholder="Enter you post" />
+      </p>
+      <button>Add post</button>
+    </form>
+  );
+};
+
+ProfileAddPostForm = reduxForm({
+  form: "profileAddPostForm"
+})(ProfileAddPostForm);
 
 export default MyPosts;
