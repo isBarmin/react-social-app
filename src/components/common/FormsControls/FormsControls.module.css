@@ -1,0 +1,13 @@
+.form-control {
+}
+
+.error input,
+.error textarea {
+  border-color: tomato;
+}
+
+.error span {
+  display: table;
+  color: tomato;
+  font-size: 12px;
+}

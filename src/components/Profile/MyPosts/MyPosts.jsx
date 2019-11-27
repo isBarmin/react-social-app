@@ -3,6 +3,10 @@ import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import { reduxForm, Field } from "redux-form";
+import { required, maxLengthCreator } from "../../../utils/validators";
+import { Textarea } from "../../common/FormsControls/FormsControls";
+
+const maxLength50 = maxLengthCreator(50);
 
 const MyPosts = props => {
   const { posts, addPost } = props;
@@ -20,7 +24,10 @@ const MyPosts = props => {
   return (
     <div>
       <h3>My posts</h3>
-      <ProfileAddPostForm className="form-add-post" onSubmit={handleSubmit} />
+      <ProfileAddPostForm
+        className={s["form-add-post"]}
+        onSubmit={handleSubmit}
+      />
       <hr />
       <div className="post-list">{renderPosts()}</div>
     </div>
@@ -32,7 +39,12 @@ let ProfileAddPostForm = ({ className, handleSubmit, ...props }) => {
   return (
     <form className={className} onSubmit={handleSubmit}>
       <p>
-        <Field component="textarea" name="post" placeholder="Enter you post" />
+        <Field
+          component={Textarea}
+          name="post"
+          placeholder="Enter you post"
+          validate={[required, maxLength50]}
+        />
       </p>
       <button>Add post</button>
     </form>
