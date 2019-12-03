@@ -1,21 +1,23 @@
-import React from "react";
-import s from "./AuthUser.module.css";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import s from './AuthUser.module.css';
+import { NavLink } from 'react-router-dom';
 
 const AuthUser = props => {
-  const { login, isAuth } = props;
+  const { login, logout, isAuth } = props;
   let body;
 
-  if (isAuth) {
-    body = (
-      <>
-        <span className={s.userBlock__login}>{login}</span>
-        <button>Logout</button>
-      </>
-    );
-  } else {
-    body = <NavLink to="/login">Login</NavLink>;
-  }
+  const handleLogoutClick = () => {
+    logout();
+  };
+
+  body = isAuth ? (
+    <>
+      <span className={s.userBlock__login}>{login}</span>
+      <button onClick={handleLogoutClick}>Logout</button>
+    </>
+  ) : (
+    (body = <NavLink to="/login">Login</NavLink>)
+  );
 
   return <div className={s.userBlock}>{body}</div>;
 };

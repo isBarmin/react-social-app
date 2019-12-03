@@ -1,8 +1,8 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import AuthUser from "./AuthUser";
-import { getAuthUserDataTC } from "../../../store/auth-reducer";
+import AuthUser from './AuthUser';
+import { getAuthUserDataTC, logoutTC } from '../../../store/auth-reducer';
 
 class AuthUserContainer extends React.Component {
   componentDidMount() {
@@ -15,7 +15,7 @@ class AuthUserContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  id: state.auth.id,
+  id: state.auth.userId,
   email: state.auth.email,
   login: state.auth.login,
   isAuth: state.auth.isAuth
@@ -24,6 +24,7 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    getAuthUserData: getAuthUserDataTC
+    getAuthUserData: getAuthUserDataTC,
+    logout: logoutTC
   }
 )(AuthUserContainer);

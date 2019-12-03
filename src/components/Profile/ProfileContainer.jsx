@@ -1,15 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { withRouter } from "react-router";
+import React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withRouter } from 'react-router';
 
-import Profile from "./Profile";
+import Profile from './Profile';
 import {
   getUserProfileTC,
   getUserStatusTC,
   updateUserStatusTC
-} from "../../store/profile-reducer";
-import withAuthRedirect from "../../hocs/withAuthRedirect";
+} from '../../store/profile-reducer';
+import withAuthRedirect from '../../hocs/withAuthRedirect';
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -43,7 +43,7 @@ const mapDispatchToProps = {
 };
 
 export default compose(
-  withAuthRedirect,
+  // withAuthRedirect,
   withRouter,
   connect(
     mapStateToProps,
