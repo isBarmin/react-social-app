@@ -1,2 +1,19 @@
 .login {
 }
+
+.form-row {
+  margin-bottom: 16px;
+}
+
+.form-row:last-child {
+  margin-bottom: 0;
+}
+
+.form-error-message {
+  display: table;
+  padding: 4px 8px;
+  border: 1px solid;
+  border-radius: 2px;
+  color: tomato;
+  font-size: 0.8em;
+}

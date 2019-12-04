@@ -1,5 +1,6 @@
 import { authAPI } from '../api/api';
 import { SET_AUTH_USER_DATA } from './actionTypes';
+import { stopSubmit } from 'redux-form';
 
 const initialState = {
   userId: null,
@@ -42,9 +43,9 @@ export const loginTC = (email, password, rememberMe) => dispatch => {
   authAPI.login(email, password, rememberMe).then(data => {
     if (data.resultCode === 0) {
       dispatch(getAuthUserDataTC());
-    }
-    if (data.resultCode === 1) {
-      console.log(data.messages[0]);
+    } else {
+      const errorMessage = data.messages.length ? data.messages[0] : 'Error';
+      dispatch(stopSubmit('login', { _error: errorMessage }));
     }
   });
 };

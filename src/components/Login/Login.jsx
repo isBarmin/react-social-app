@@ -10,7 +10,7 @@ import { Redirect } from 'react-router';
 const LoginForm = props => {
   return (
     <form onSubmit={props.handleSubmit}>
-      <p>
+      <div className={s['form-row']}>
         <Field
           component={Input}
           type="text"
@@ -18,8 +18,8 @@ const LoginForm = props => {
           placeholder="email"
           validate={[required]}
         />
-      </p>
-      <p>
+      </div>
+      <div className={s['form-row']}>
         <Field
           component={Input}
           type="password"
@@ -27,16 +27,17 @@ const LoginForm = props => {
           placeholder="Password"
           validate={[required]}
         />
-      </p>
-      <p>
+      </div>
+      <div className={s['form-row']}>
         <label>
           <Field component="input" type="checkbox" name="rememberMe" /> remember
           me
         </label>
-      </p>
-      <p>
+      </div>
+      {props.error && <p className={s['form-error-message']}>{props.error}</p>}
+      <div className={s['form-row']}>
         <button>Login</button>
-      </p>
+      </div>
     </form>
   );
 };
