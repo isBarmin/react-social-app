@@ -31,7 +31,7 @@ export const setAuthUserDataAC = (userId, email, login, isAuth) => ({
 
 // thunk
 export const getAuthUserDataTC = () => dispatch => {
-  authAPI.me().then(data => {
+  return authAPI.me().then(data => {
     const { id, email, login } = data.data;
     if (data.resultCode === 0) {
       dispatch(setAuthUserDataAC(id, email, login, true));

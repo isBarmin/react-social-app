@@ -37,14 +37,14 @@ const MyPosts = props => {
 let ProfileAddPostForm = ({ className, handleSubmit, ...props }) => {
   return (
     <form className={className} onSubmit={handleSubmit}>
-      <p>
+      <div className={s['form-row']}>
         <Field
           component={Textarea}
           name="post"
           placeholder="Enter you post"
           validate={[required, maxLength50]}
         />
-      </p>
+      </div>
       <button>Add post</button>
     </form>
   );
